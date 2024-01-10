@@ -54,7 +54,7 @@ function closeModal() {
 * @return  {Boolean}  true si valide sinon false
 */
 
-function validateFirstName() {
+function validateFirstname() {
   //La méthode trim() supprime l'espace blanc des deux côtés de la chaîne. La méthode trim() ne modifie pas la chaîne d'origine
   const parent = document.getElementById('first').parentNode;
         if (Firstname.value.trim() == '' || !regexFirstLastName.test(Firstname.value)) {
@@ -72,12 +72,12 @@ function validateFirstName() {
 
 // Listener sur les champs
 Firstname.addEventListener('change', function () {
-  validateFirstName(this);
+  validateFirstname(this);
 });
 
 // On vérifie si  le champ est valide sinon on affiche un message d'erreur.
 function verifChamps() {
-  validateFirstName()}
+  validateFirstname()}
 
 // Si  le champ sont valide on envoie la message de validation
 function envoieValider(){
