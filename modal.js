@@ -49,6 +49,7 @@ function closeModal() {
 //Fermer le Modal
 modalClose.addEventListener('click', closeModal);
 
+
 // Listener sur les champs
 Firstname.addEventListener('change', function () {
   validateFirstname(this);
@@ -83,5 +84,5 @@ function validateFirstname() {
             }
               parent.setAttribute('data-error-visible', 'false');
               return true;
-}
+};
 
