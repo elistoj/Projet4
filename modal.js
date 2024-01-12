@@ -25,8 +25,8 @@ const btnSubmit = document.getElementById('submit');
 const regexFirstLastName = /^([A-Za-z|\s]{2,20})?([-]{0,1})?([A-Za-z|\s]{2,20})$/;  
 const regexEmail = /^[a-zA-Z][a-zA-Z0-9\-\_\.]+@[a-zA-Z]{2,}\.[a-zA-Z]{2,}$/;
 const regexQuantity = /^([0-9]{1,2})$/;
-
-
+const parent = document.getElementById('first').parentNode;
+const modalClose = document.querySelector('.close');
 
 // launch modal form// le formulaire s'ouvre comme une fenêtre modale
 
@@ -44,31 +44,10 @@ modalBtn.forEach((btn) => btn.addEventListener('click', launchModal));
 // Close modal form // fermer la fenêtre modale et le formulaire
 function closeModal() {
   modalbg.style.display = 'none';
-};
-
-
-/////// VALIDATION DES CHAMPS //////
-/**
-*Validation du prénom et message erreur si il ya des erreurs!!
-*
-* @return  {Boolean}  true si valide sinon false
-*/
-
-function validateFirstname() {
-  //La méthode trim() supprime l'espace blanc des deux côtés de la chaîne. La méthode trim() ne modifie pas la chaîne d'origine
-  const parent = document.getElementById('first').parentNode;
-        if (Firstname.value.trim() == '' || !regexFirstLastName.test(Firstname.value)) {
-             Firstname.focus();
-              parent.setAttribute(
-                    'data-error',
-                    'Minimum 2 caractères, maximum 20 caractères. Les chiffres et caractères spéciaux  ne sont pas autorisés !'
-              );
-              parent.setAttribute('data-error-visible', 'true');
-              return false;
-        }
-        parent.setAttribute('data-error-visible', 'false');
-        return true;
 }
+
+//Fermer le Modal
+modalClose.addEventListener('click', closeModal);
 
 // Listener sur les champs
 Firstname.addEventListener('change', function () {
@@ -83,3 +62,26 @@ function verifChamps() {
 function envoieValider(){
   modalbg.style.display = "none";
 };
+
+/////// VALIDATION DES CHAMPS //////
+/**
+*Validation du prénom et message erreur si il ya des erreurs!!
+*
+* @return  {Boolean}  true si valide sinon false
+*/
+
+function validateFirstname() {
+  //La méthode trim() supprime l'espace blanc des deux côtés de la chaîne. La méthode trim() ne modifie pas la chaîne d'origine
+        if (Firstname.value.trim() == '' || !regexFirstLastName.test(Firstname.value)) {
+             Firstname.focus();
+              parent.setAttribute(
+                    'data-error',
+                    'Minimum 2 caractères, maximum 20 caractères. Les chiffres et caractères spéciaux  ne sont pas autorisés !'
+              );
+              parent.setAttribute('data-error-visible', 'true');
+              return false;
+            }
+              parent.setAttribute('data-error-visible', 'false');
+              return true;
+}
+
