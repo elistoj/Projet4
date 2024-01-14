@@ -28,6 +28,10 @@ const regexQuantity = /^([0-9]{1,2})$/;
 const parent = document.getElementById('first').parentNode;
 const modalClose = document.querySelector('.close');
 
+//Message d'erreur
+const message = {
+  name: 'Minimum 2 caractères, maximum 20 caractères. Les chiffres et caractères spéciaux différents de - ne sont pas autorisés'
+  };
 // launch modal form// le formulaire s'ouvre comme une fenêtre modale
 
 function launchModal() {
@@ -64,21 +68,20 @@ function envoieValider(){
   modalbg.style.display = "none";
 };
 
-/////// VALIDATION DES CHAMPS //////
-/**
-*Validation du prénom et message erreur si il ya des erreurs!!
-*
-* @return  {Boolean}  true si valide sinon false
-*/
+
+// VALIDATION DES CHAMPS //
+
+//Validation du prénom et message erreur si il ya des erreurs!!
+// @return  {Boolean}  true si valide sinon false
+
+
 
 function validateFirstname() {
   //La méthode trim() supprime l'espace blanc des deux côtés de la chaîne. La méthode trim() ne modifie pas la chaîne d'origine
         if (Firstname.value.trim() == '' || !regexFirstLastName.test(Firstname.value)) {
-             Firstname.focus();
-              parent.setAttribute(
-                    'data-error',
-                    'Minimum 2 caractères, maximum 20 caractères. Les chiffres et caractères spéciaux  ne sont pas autorisés !'
-              );
+
+              parent.setAttribute('data-error', message.name);
+
               parent.setAttribute('data-error-visible', 'true');
               return false;
             }
