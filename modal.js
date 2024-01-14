@@ -32,6 +32,8 @@ const modalClose = document.querySelector('.close');
 const message = {
   name: 'Minimum 2 caractères, maximum 20 caractères. Les chiffres et caractères spéciaux différents de - ne sont pas autorisés'
   };
+
+
 // launch modal form// le formulaire s'ouvre comme une fenêtre modale
 
 function launchModal() {
@@ -53,19 +55,18 @@ function closeModal() {
 //Fermer le Modal
 modalClose.addEventListener('click', closeModal);
 
-
 // Listener sur les champs
 Firstname.addEventListener('change', function () {
   validateFirstname(this);
 });
+Lastname.addEventListener('change', function () {
+  validateLastname(this);
+});
 
 // On vérifie si  le champ est valide sinon on affiche un message d'erreur.
 function verifChamps() {
-  validateFirstname()}
-
-// Si  le champ sont valide on envoie la message de validation
-function envoieValider(){
-  modalbg.style.display = "none";
+  validateFirstname() &&
+  validateLastname()
 };
 
 
@@ -88,4 +89,23 @@ function validateFirstname() {
               parent.setAttribute('data-error-visible', 'false');
               return true;
 };
+function validateLastname() {
+  //La méthode trim() supprime l'espace blanc des deux côtés de la chaîne. La méthode trim() ne modifie pas la chaîne d'origine
+        if (Lastname.value.trim() == '' || !regexFirstLastName.test(Lastname.value)) {
 
+              parent.setAttribute('data-error', message.name);
+
+              parent.setAttribute('data-error-visible', 'true');
+              return false;
+            }
+              parent.setAttribute('data-error-visible', 'false');
+              return true;
+};
+
+
+
+
+// Si  le champ sont valide on envoie la message de validation
+function envoieValider(){
+  modalbg.style.display = "none";
+};
