@@ -27,10 +27,13 @@ const regexEmail = /^[a-zA-Z][a-zA-Z0-9\-\_\.]+@[a-zA-Z]{2,}\.[a-zA-Z]{2,}$/;
 const regexQuantity = /^([0-9]{1,2})$/;
 const parent = document.getElementById('first').parentNode;
 const modalClose = document.querySelector('.close');
+const form = document.getElementById('reserve');
 
 //Message d'erreur
 const message = {
-  name: 'Minimum 2 caractères, maximum 20 caractères. Les chiffres et caractères spéciaux différents de - ne sont pas autorisés'
+  name: 'Minimum 2 caractères, maximum 20 caractères. Les chiffres et caractères spéciaux différents de - ne sont pas autorisés',
+  lastname: 'Minimum 2 caractères, maximum 20 caractères. Les chiffres et caractères spéciaux différents de - ne sont pas autorisés'
+
   };
 
 
@@ -57,27 +60,42 @@ modalClose.addEventListener('click', closeModal);
 
 // Listener sur les champs
 Firstname.addEventListener('change', function () {
-  validateFirstname(this);
+  validateFirstName(this);
 });
 Lastname.addEventListener('change', function () {
-  validateLastname(this);
+  validateLastName(this);
 });
 
 // On vérifie si  le champ est valide sinon on affiche un message d'erreur.
 function verifChamps() {
-  validateFirstname() &&
-  validateLastname()
+  validateFirstName() &&
+  validateLastName()
 };
+/* fonction validation du formulaire */
+function validate() {
+  if (
+        validateFirstName() && 
+        validateLastName() 
+        ) {
+        verifChamps();
+  }
+  return true; 
+};
+// Envoyer la demande
+form.addEventListener('submit', function (event) {
+  event.preventDefault();
+  validate()
+});
 
 
 // VALIDATION DES CHAMPS //
 
-//Validation du prénom et message erreur si il ya des erreurs!!
+//Validation du prénom et message erreur !!
 // @return  {Boolean}  true si valide sinon false
 
 
 
-function validateFirstname() {
+function validateFirstName() {
   //La méthode trim() supprime l'espace blanc des deux côtés de la chaîne. La méthode trim() ne modifie pas la chaîne d'origine
         if (Firstname.value.trim() == '' || !regexFirstLastName.test(Firstname.value)) {
 
@@ -89,7 +107,7 @@ function validateFirstname() {
               parent.setAttribute('data-error-visible', 'false');
               return true;
 };
-function validateLastname() {
+function validateLastName() {
   //La méthode trim() supprime l'espace blanc des deux côtés de la chaîne. La méthode trim() ne modifie pas la chaîne d'origine
         if (Lastname.value.trim() == '' || !regexFirstLastName.test(Lastname.value)) {
 
