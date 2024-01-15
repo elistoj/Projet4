@@ -12,6 +12,9 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 
+//Formulaire
+const form = document.getElementById('reserve');
+const ValidateForm = document.querySelector('validateForm');
 
 // Récupérer les champs du formulaire
 const Firstname = document.getElementById('first');
@@ -24,16 +27,16 @@ const cgu = document.getElementById('checkbox1');
 const btnSubmit = document.getElementById('submit');
 const regexFirstLastName = /^([A-Za-z|\s]{2,20})?([-]{0,1})?([A-Za-z|\s]{2,20})$/;  
 const regexEmail = /^[a-zA-Z][a-zA-Z0-9\-\_\.]+@[a-zA-Z]{2,}\.[a-zA-Z]{2,}$/;
+const regexBirthdate = /^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
 const regexQuantity = /^([0-9]{1,2})$/;
-const parent = document.getElementById('first').parentNode;
 const modalClose = document.querySelector('.close');
-const form = document.getElementById('reserve');
+
 
 //Message d'erreur
 const message = {
   name: 'Minimum 2 caractères, maximum 20 caractères. Les chiffres et caractères spéciaux différents de - ne sont pas autorisés',
-  lastname: 'Minimum 2 caractères, maximum 20 caractères. Les chiffres et caractères spéciaux différents de - ne sont pas autorisés'
-
+  email: 'Veuillez renseigner une adresse mail valide.',
+  birthday: 'Veuillez entrer une date de naissance valide !'
   };
 
 
@@ -53,6 +56,8 @@ modalBtn.forEach((btn) => btn.addEventListener('click', launchModal));
 // Close modal form // fermer la fenêtre modale et le formulaire
 function closeModal() {
   modalbg.style.display = 'none';
+  window.location.reload();
+  form.reset();
 }
 
 //Fermer le Modal
@@ -65,17 +70,26 @@ Firstname.addEventListener('change', function () {
 Lastname.addEventListener('change', function () {
   validateLastName(this);
 });
-
+email.addEventListener('change', function () {
+  validateEmail(this);
+});
+birthdate.addEventListener('change', function () {
+  validateBirthdate(this);
+});
 // On vérifie si  le champ est valide sinon on affiche un message d'erreur.
 function verifChamps() {
   validateFirstName() &&
-  validateLastName()
+  validateLastName() &&
+  validateEmail()&&
+  validateBirthdate
 };
 /* fonction validation du formulaire */
 function validate() {
   if (
         validateFirstName() && 
-        validateLastName() 
+        validateLastName() &&
+        validateEmail()&&
+        validateBirthdate
         ) {
         verifChamps();
   }
@@ -96,6 +110,8 @@ form.addEventListener('submit', function (event) {
 
 
 function validateFirstName() {
+  const parent = document.getElementById('first').parentNode;
+
   //La méthode trim() supprime l'espace blanc des deux côtés de la chaîne. La méthode trim() ne modifie pas la chaîne d'origine
         if (Firstname.value.trim() == '' || !regexFirstLastName.test(Firstname.value)) {
 
@@ -107,8 +123,11 @@ function validateFirstName() {
               parent.setAttribute('data-error-visible', 'false');
               return true;
 };
+//Validation du nom et message erreur !!
+
+
 function validateLastName() {
-  //La méthode trim() supprime l'espace blanc des deux côtés de la chaîne. La méthode trim() ne modifie pas la chaîne d'origine
+  const parent = document.getElementById('last').parentNode;
         if (Lastname.value.trim() == '' || !regexFirstLastName.test(Lastname.value)) {
 
               parent.setAttribute('data-error', message.name);
@@ -119,7 +138,38 @@ function validateLastName() {
               parent.setAttribute('data-error-visible', 'false');
               return true;
 };
+// Validation du email et message erreur!!!
 
+function validateEmail() {
+  const parent = document.getElementById('email').parentNode;
+
+        if (email.value.trim() == '' || !regexEmail.test(email.value)) {
+              email.focus();
+              parent.setAttribute(
+                    'data-error',message.email);
+
+              parent.setAttribute('data-error-visible', 'true');
+              return false;
+        }
+        parent.setAttribute('data-error-visible', 'false');
+        return true;
+};
+
+// Validation date de naissance et message erreur!!!
+function validateBirthdate() {
+
+  const parent = document.getElementById('birthdate').parentNode;
+  
+        if (birthdate.value.trim == '' || !regexBirthdate.test(birthdate.value)) {
+              parent.setAttribute(
+                    'data-error', message.birthday );
+
+                    parent.setAttribute('data-error-visible', 'true');
+              return false;
+        }
+        parent.setAttribute('data-error-visible', 'false');
+        return true;
+};
 
 
 
