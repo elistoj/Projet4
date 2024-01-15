@@ -44,10 +44,9 @@ img {
 .main-navbar {
   display: flex;
   justify-content: flex-end;
-  width: 100%;
+  
 }
 .topnav a {
-  display: block;
   color: #000000;
   text-align: center;
   padding: 12px 12px;
@@ -461,6 +460,7 @@ input[data-error]::after {
 }
 .hero-img img {
   width: 100%;
+  object-fit: cover;
   display: block;
   padding: 0;
 }
@@ -481,6 +481,9 @@ footer {
 }
 
 @media screen and (max-width: 800px) {
+  .main-navbar {
+    display: block;
+  }
   .hero-section {
    height: 100%;
     width: 100%;
