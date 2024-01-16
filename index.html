@@ -17,6 +17,8 @@
       <img alt="logo" src="Logo.png"/>
       </div>
     <nav class="main-navbar">
+        <!-- Effacer <a href="#" class="active"><span>Accueil</span></a> -->
+      <!-- Toggle navbar -->
       <a href="#"><span>Détails de l'évènement</span></a>
       <a href="#"><span>À propos</span></a>
       <a href="#"><span>Contact</span></a>
@@ -27,6 +29,8 @@
     </nav>
   </header>
     <main>
+      <!-- Hero Section -->
+
       <section class="hero-section">
         <div class="hero-content">
           <h1 class="hero-headline">
@@ -34,8 +38,8 @@
             de jeux vidéos
           </h1>
           <p class="hero-text">
-            Vous aimez jouer ? Notre prochain <br>
-             évènement gaming est ouvert<br>
+            Vous aimez jouer ? Notre prochain 
+             évènement gaming est ouvert
             aux réservations... Places limitées !
           </p>
           <button class="btn-signup modal-btn">
@@ -49,7 +53,8 @@
           je m'inscris
         </button>
       </section>
-
+<!-- FORMULAIRE D'INSCRIPTION -->
+    <!-- Ajout de l'attribut for à la balise label -->
       <div class="bground">
         <div class="content">
           <span class="close"></span>
@@ -185,22 +190,21 @@
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
                 <br>
-                <input class="checkbox-input" type="checkbox" id="checkbox2"/>
+                <input class="checkbox-input"
+                 type="checkbox" 
+                 id="checkbox2"
+                 />
+                 <!-- Effacer double Je -->
                 <label class="checkbox2-label" for="checkbox2">
                   <span class="checkbox-icon"></span>
                   Je souhaite être prévenu des prochains évènements.
                 </label>
                 <br>
               </div>
-              <input
-                class="btn-submit"
-                type="button"
-                id="submit"
-                value="C'est parti"
-              />
-            </form>
+              <!-- Suppression 2eme class et ajout d'un id -->
+            <input id="btnSubmit" class="btn-submit button" type="submit" value="C'est parti">
+          </form>
           </div>
-        </div>
       </div>
     </main>
     <footer>
