@@ -57,7 +57,7 @@
     <!-- Ajout de l'attribut for à la balise label -->
       <div class="bground">
         <div class="content">
-          <span class="close"></span>
+          <span class="close"  onclick=closeModal() title="Fermer"></span>
           <div class="modal-body">
             <form
               name="reserve"
@@ -83,6 +83,7 @@
                   type="text"
                   id="last"
                   name="last"
+                  minlength="2"
                 /><br>
               </div>
               <div class="formData">
@@ -179,17 +180,23 @@
 
               <div
                 class="formData">
+                <!-- Ajout de l'attribut name -->
                 <input
                   class="checkbox-input"
                   type="checkbox"
+                  name='cgu'
                   id="checkbox1"
                   checked
                 />
-                <label class="checkbox2-label" for="checkbox1" required>
+                <!-- Suppression de required -->
+                <label class="checkbox2-label"  for="checkbox1">
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
                 <br>
+              </div>
+              <!-- Séparation input pour afficher le message d'erreur sous la première checkbox -->
+              <div class="formData">
                 <input class="checkbox-input" type="checkbox" id="checkbox2" />
                 <label class="checkbox2-label" for="checkbox2">
                   <span class="checkbox-icon"></span>
@@ -197,6 +204,8 @@
                 </label>
                 <br>
               </div>
+              <!-- Effacer 2eme class et ajouter ID -->
+
               <input
                 id="btn-submit"
                 type="submit"
