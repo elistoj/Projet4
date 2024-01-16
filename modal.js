@@ -32,14 +32,14 @@ const modalClose = document.querySelector('.close');
 
 
 
-//Message d'erreur
+//Message d'erreur//
 const message = {
   name: 'Minimum 2 caractères, maximum 20 caractères. Les chiffres et caractères spéciaux différents de - ne sont pas autorisés',
   email: 'Veuillez renseigner une adresse mail valide !',
   birthday: 'Veuillez entrer une date de naissance valide !',
   quantity: 'Veuillez saisir un nombre entre 0 et 99 !',
   city: 'Veuillez sélectionner une ville!',
-  conditions: `Vous devez accepter les conditions d'utilisation`
+  conditions: 'Vous devez accepter les conditions d`utilisation',
   };
 
 
@@ -75,7 +75,7 @@ function validateFirstName() {
 
   //La méthode trim() supprime l'espace blanc des deux côtés de la chaîne. La méthode trim() ne modifie pas la chaîne d'origine
         if (Firstname.value.trim() == '' || !regexFirstLastName.test(Firstname.value)) {
-
+          Firstname.focus();
               parent.setAttribute('data-error', message.name);
 
               parent.setAttribute('data-error-visible', 'true');
@@ -91,7 +91,7 @@ function validateFirstName() {
 function validateLastName() {
   const parent = document.getElementById('last').parentNode;
         if (Lastname.value.trim() == '' || !regexFirstLastName.test(Lastname.value)) {
-
+          Lastname.focus();
               parent.setAttribute('data-error', message.name);
 
               parent.setAttribute('data-error-visible', 'true');
