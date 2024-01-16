@@ -32,7 +32,7 @@ const modalClose = document.querySelector('.close');
 
 
 
-//Message d'erreur//
+//Message d'erreur
 const message = {
   name: 'Minimum 2 caractères, maximum 20 caractères. Les chiffres et caractères spéciaux différents de - ne sont pas autorisés',
   email: 'Veuillez renseigner une adresse mail valide !',
