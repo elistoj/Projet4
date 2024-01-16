@@ -14,7 +14,6 @@ const formData = document.querySelectorAll(".formData");
 
 //Formulaire
 const form = document.getElementById('reserve');
-const validateForm = document.querySelector('validateForm');
 
 // Récupérer les champs du formulaire
 const Firstname = document.getElementById('first');
@@ -57,14 +56,6 @@ modalBtn.forEach((btn) => btn.addEventListener('click', launchModal));
 //Cette fonction est appelée fonction de rappel.
 
 
-
-
-
-// VALIDATION DES CHAMPS //
-
-//Validation du prénom et message erreur !!
-// @return  {Boolean}  true si valide sinon false
-
 // Close modal form // fermer la fenêtre modale et le formulaire
 function closeModal() {
   modalbg.style.display = 'none';
@@ -72,7 +63,11 @@ function closeModal() {
 
 //Fermer le Modal
 modalClose.addEventListener('click', closeModal);
- 
+
+
+ // VALIDATION DES CHAMPS //
+
+// @return  {Boolean}  true si valide sinon false
 //Validation du prenom et message erreur !
 
 function validateFirstName() {
