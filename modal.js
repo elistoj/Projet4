@@ -14,6 +14,7 @@ const formData = document.querySelectorAll(".formData");
 
 //Formulaire
 const form = document.getElementById('reserve');
+const validateForm = document.querySelector('validateForm');
 
 // Récupérer les champs du formulaire
 const Firstname = document.getElementById('first');
@@ -23,12 +24,13 @@ const birthdate = document.getElementById('birthdate');
 const quantity = document.getElementById('quantity');
 const city = document.querySelectorAll('[name="location"]');
 const cgu = document.getElementById('checkbox1');
-const btnSubmit = document.getElementById('submit');
+const btnSubmit = document.getElementById('btnSubmit');
 const regexFirstLastName = /^([A-Za-z|\s]{2,20})?([-]{0,1})?([A-Za-z|\s]{2,20})$/;  
 const regexEmail = /^[a-zA-Z][a-zA-Z0-9\-\_\.]+@[a-zA-Z]{2,}\.[a-zA-Z]{2,}$/;
 const regexBirthdate = /^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
 const regexQuantity = /^([0-9]{1,2})$/;
 const modalClose = document.querySelector('.close');
+
 
 
 //Message d'erreur
@@ -66,13 +68,12 @@ modalBtn.forEach((btn) => btn.addEventListener('click', launchModal));
 // Close modal form // fermer la fenêtre modale et le formulaire
 function closeModal() {
   modalbg.style.display = 'none';
-  window.location.reload();
-  form.reset();
 }
 
 //Fermer le Modal
 modalClose.addEventListener('click', closeModal);
  
+//Validation du prenom et message erreur !
 
 function validateFirstName() {
   const parent = document.getElementById('first').parentNode;
@@ -88,7 +89,8 @@ function validateFirstName() {
               parent.setAttribute('data-error-visible', 'false');
               return true;
 };
-//Validation du nom et message erreur !!
+
+//Validation du nom et message erreur !
 
 
 function validateLastName() {
@@ -240,11 +242,15 @@ function envoieValider(){
   modalbg.style.display = "none";
 };
 
-// Envoyer la demande
+// Envoyer la demande- Utiliser Button Submit
 form.addEventListener('submit', function (event) {
   event.preventDefault();
   validate()
 });
+
+
+
+
 
 
 
