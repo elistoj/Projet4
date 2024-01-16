@@ -443,23 +443,25 @@ input[data-error]::after {
   white-space: nowrap;
 }
 .hero-text {
-  width: 126%;
+  width: 110%;
   font-weight: normal;
-  margin-top: 20%;
+  margin-top: 15%;
   padding: 0;
 }
 .btn-signup {
   outline: none;
   text-transform: capitalize;
   font-size: 1.3rem;
-  padding: 15px 23px;
+  padding: 10px 23px;
   margin: 0;
-  margin-top: 20%;
+  margin-top: 15%;
 }
 .hero-img {
   grid-column: span 8;
+  /*Ajouter hauteur, longeur et position- relative pour voir toute le photo*/
   width: 100%;
   height: 100%;
+  position: relative;
 
 }
 .hero-img img {
