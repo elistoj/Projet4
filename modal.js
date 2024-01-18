@@ -11,9 +11,14 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
+const modalbgThanks = document.querySelector('.confirmation');
+
+
 
 //Formulaire
 const form = document.getElementById('reserve');
+const validateForm = document.querySelector('#validateForm');
+
 
 // Récupérer les champs du formulaire
 const Firstname = document.getElementById('first');
@@ -21,22 +26,24 @@ const Lastname = document.getElementById('last');
 const email = document.getElementById('email');
 const birthdate = document.getElementById('birthdate');
 const quantity = document.getElementById('quantity');
-const city = document.querySelectorAll('[name="location"]');
+const city = document.querySelectorAll(' input[name="location"]');
 const cgu = document.getElementById('checkbox1');
 const btnSubmit = document.getElementById('btnSubmit');
 const regexFirstLastName = /^([A-Za-z|\s]{2,20})?([-]{0,1})?([A-Za-z|\s]{2,20})$/;  
 const regexEmail = /^[a-zA-Z][a-zA-Z0-9\-\_\.]+@[a-zA-Z]{2,}\.[a-zA-Z]{2,}$/;
 const regexBirthdate = /^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
 const regexQuantity = /^([0-9]{1,2})$/;
+const validateMessage = document.getElementById('validateMessage');
 const modalClose = document.querySelector('.close');
+const btnValid = document.getElementById('btnValid');
 
-
+ 
 
 //Message d'erreur
 const message = {
   name: 'Minimum 2 caractères, maximum 20 caractères. Les chiffres et caractères spéciaux différents de - ne sont pas autorisés',
   email: 'Veuillez renseigner une adresse mail valide !',
-  birthday: 'Veuillez entrer une date de naissance valide !',
+  birthday: 'Veuillez entrer une date de naissance valide (âge minimum : 18 ans).',
   quantity: 'Veuillez saisir un nombre entre 0 et 99 !',
   city: 'Veuillez sélectionner une ville!',
   conditions: 'Vous devez accepter les conditions d`utilisation',
@@ -64,7 +71,13 @@ function closeModal() {
 //Fermer le Modal
 modalClose.addEventListener('click', closeModal);
 
-
+// On ferme la modale de confirmation
+function closeModalConfirmation() {
+  modalbgThanks.style.display = 'none';
+  modalbg.style.display = 'none';
+  window.location.reload();
+  form.reset();
+};
  // VALIDATION DES CHAMPS //
 
 // @return  {Boolean}  true si valide sinon false
@@ -118,21 +131,31 @@ function validateEmail() {
 };
 
 // Validation date de naissance et message erreur!!!
+// Validation de la date de naissance (doit être âgé de plus de 18 ans)
 function validateBirthdate() {
-
   const parent = document.getElementById('birthdate').parentNode;
+  const currentDate = new Date();
+  const selectedDate = new Date(birthdate.value);
 
-        if (!birthdate.value) {
+  // Calculate age difference in years
+  const ageDifference = currentDate.getFullYear() - selectedDate.getFullYear();
 
-              parent.setAttribute(
-                    'data-error', message.birthday );
+  if (
+    isNaN(selectedDate) ||
+    selectedDate > currentDate ||
+    ageDifference < 18 ||
+    ageDifference > 101
+  ) {
+    parent.setAttribute('data-error', message.birthday);
+    parent.setAttribute('data-error-visible', 'true');
+    return false;
+  }
 
-                    parent.setAttribute('data-error-visible', 'true');
-              return false;
-        }
-        parent.setAttribute('data-error-visible', 'false');
-        return true;
-};
+  parent.setAttribute('data-error-visible', 'false');
+  return true;
+}
+
+
 // Validation du numéro de participation!!!
 
 function validateQuantity() {
@@ -152,35 +175,34 @@ function validateQuantity() {
 };
 
 //Validation de choix de ville
-
 function validateCity() {
+  const parent = document.getElementById('cityError');
 
-  const parent = document.getElementById('city').parentNode;
+  // Iterate through the radio buttons and check if at least one is selected
+  const selectedCity = Array.from(city).some((radio) => radio.checked);
 
-        if (document.querySelector('input[name="location"]:checked') == null) {
-          document.querySelector('input[name="location"]').parentElement.setAttribute ('data-error', message.city );
+  if (!selectedCity) {
+    parent.setAttribute('data-error', message.city);
+    parent.setAttribute('data-error-visible', 'true');
+    return false;
+  }
 
-                    parent.setAttribute('data-error-visible', 'true');
-              return false;
-        }
-        parent.setAttribute('data-error-visible', 'false');
-        return true;
-};
+  parent.setAttribute('data-error-visible', 'false');
+  return true;
+}
+
 
 // Validation de  Cgu
 
 function validateCgu() {
-  if (document.querySelector('input[name="cgu"]:checked') == null) {
-        document.querySelector('input[name="cgu"]').parentElement.setAttribute(
-              'data-error',
-              'Veuillez accepter les conditions générales d\'utilisation !'
-        );
-        document.querySelector('input[name="cgu"]').parentElement.setAttribute('data-error-visible', 'true');
-        return false;
-  }
-  document.querySelector('input[name="cgu"]').parentElement.setAttribute('data-error-visible', 'false');
-  return true;
-}
+    if (!cgu.checked) {
+      cgu.parentElement.setAttribute('data-error', message.conditions);
+      cgu.parentElement.setAttribute('data-error-visible', 'true');
+      return false;
+    }
+    cgu.parentElement.setAttribute('data-error-visible', 'false');
+    return true;
+  };
 
 // Listener sur les champs
 Firstname.addEventListener('change', function () {
@@ -193,52 +215,63 @@ email.addEventListener('change', function () {
   validateEmail(this);
 });
 birthdate.addEventListener('change', function () {
-  validateBirthdate(this);
+  validateBirthdate();
 });
+
 quantity.addEventListener('change', function () {
   validateQuantity(this);
-});
-city.addEventListener('change', function () {
-  validateCity(this);
 });
 cgu.addEventListener('change', function () {
   validateCgu(this);
 });
 
-// Verification si  le champ est valide sinon on affiche un message d'erreur.
-function verifChamps() {
-  validateFirstName() &&
-  validateLastName() &&
-  validateEmail()&&
-  validateBirthdate &&
-  validateQuantity &&
-  validateCity &&
-  validateCgu
-};
-// Validation du formulaire //
-
-function validate() {
-  if (
-        validateFirstName() && 
-        validateLastName() &&
-        validateEmail()&&
-        validateBirthdate &&
-        validateQuantity &&
-        validateCity &&
-        validateCgu
-        ) {
-        verifChamps();
-  }
-  return true; 
-};
 
 // Si  le champ sont valide on envoie la message de validation
 function envoieValider(){
   modalbg.style.display = "none";
 };
 
-// Envoyer la demande- Utiliser Button Submit
+// Validation du formulaire //
+
+function validate() {
+  if (
+      validateFirstName() && 
+      validateLastName() &&
+      validateEmail()&&
+      validateBirthdate() &&
+      validateQuantity() &&
+      validateCity() &&
+      validateCgu()
+      ) {
+      openModalThanking();
+      } 
+      else {
+      alert('Merci de remplir correctement votre inscription.')
+      }; 
+};
+
+// Envoyer la demande
 form.addEventListener('submit', function (event) {
   event.preventDefault();
   validate()
 });
+
+/// Modal de remerciement
+function openModalThanking() {
+  form.style.display = 'none'
+  document.querySelector(".confirmation").classList.remove("aria-hidden");
+  document.querySelector(".confirmation").classList.add("aria-succes");
+  
+}
+ 
+// ACTIVE LINKS, TOGGLE NAVBAR
+const activeLinks = document.querySelectorAll('.nav__link');
+activeLinks.forEach(activeLink => {
+      activeLink.addEventListener('click', () => {
+            document.querySelector('.active')?.classList.remove('active');
+            activeLink.classList.add('active');
+      });
+});
+
+
+
