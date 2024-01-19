@@ -13,28 +13,28 @@
 		<div class="header-logo"><img alt="logo" src="Logo.png"></div>
 		<nav class="main-navbar">
 			<!-- Effacer <a href="#" class="active"><span>Accueil</span></a> -->
-			<!-- Toggle navbar -->
+			<!-- Changer navbar -->
 			<a href="#"><span>Détails de l'évènement</span></a> <a href="#"><span>À propos</span></a> <a href="#"><span>Contact</span></a> <a href="#"><span>Évènements passés</span></a> <a class="icon" href="javascript:void(0);" onclick="editNav()"><i class="fa fa-bars"></i></a>
 		</nav>
 	</header>
 	<main>
-		<!-- Hero section -->
-		<div class="hero-section">
+		<!-- Changer DIV -> SECTION -HERO SECTION-->
+		<section class="hero-section">
 			<div class="hero-content">
 				<h1 class="hero-headline">Marathon national<br>
 				de jeux vidéos</h1>
 				<p class="hero-text">Vous aimez jouer ? Notre prochain évènement gaming est ouvert aux réservations... Places limitées !</p><button class="btn-signup modal-btn">je m'inscris</button>
 			</div>
 			<div class="hero-img"><img alt="img" src="bg_img.jpg"></div><button class="btn-signup modal-btn">je m'inscris</button>
-		</div><!-- Modal -->
-		<!-- FORMULAIRE D'INSCRIPTION -->
-		<!-- Ajout de l'attribut for à la balise label -->
+		</section>
+		<!-- MODAL D'INSCRIPTION -->
+		<!-- Ajouter de l'attribut for à la balise label -->
 		<div class="bground">
 			<div class="content">
 				<span class="close" onclick="closeModal()" title="Fermer"></span>
 				<div class="modal-body">
-            <!-- Ajoutez un identifiant au formulaire pour un accès facile -->					
-            <form action="index.html" id="reserve" method="get" name="reserve" onsubmit="return validate();">
+					<!-- Ajoutez un identifiant au formulaire pour un accès facile -->
+					<form action="index.html" id="reserve" method="get" name="reserve" onsubmit="return validate();">
 						<div class="formData">
 							<label for="first">Prénom</label><br>
 							<input class="text-control" id="first" name="first" type="text"><br>
@@ -59,18 +59,21 @@
 						<div class="formData">
 							<input class="checkbox-input" id="location1" name="location" type="radio" value="New York"> <label class="checkbox-label" for="location1"><span class="checkbox-icon"></span> New York</label> <input class="checkbox-input" id="location2" name="location" type="radio" value="San Francisco"> <label class="checkbox-label" for="location2"><span class="checkbox-icon"></span> San Francisco</label> <input class="checkbox-input" id="location3" name="location" type="radio" value="Seattle"> <label class="checkbox-label" for="location3"><span class="checkbox-icon"></span> Seattle</label> <input class="checkbox-input" id="location4" name="location" type="radio" value="Chicago"> <label class="checkbox-label" for="location4"><span class="checkbox-icon"></span> Chicago</label> <input class="checkbox-input" id="location5" name="location" type="radio" value="Boston"> <label class="checkbox-label" for="location5"><span class="checkbox-icon"></span> Boston</label> <input class="checkbox-input" id="location6" name="location" type="radio" value="Portland"> <label class="checkbox-label" for="location6"><span class="checkbox-icon"></span> Portland</label>
 						</div>
-            <!-- Ajouter un div pour afficher les messages d'erreur pour la ville -->
+						<!-- Ajouter un div pour afficher les messages d'erreur pour la ville -->
 						<div class="formData" data-error="Veuillez sélectionner une ville!" data-error-visible="false" id="cityError"></div>
 						<div class="formData">
 							<!-- Ajout de l'attribut name  et suppression de checked-->
 							<input class="checkbox-input" id="checkbox1" name="cgu" type="checkbox"> <!-- suppression de required -->
 							 <label class="checkbox2-label" for="checkbox1"><span class="checkbox-icon"></span> J'ai lu et accepté les conditions d'utilisation.</label><br>
-						</div><!-- Séparation input pour afficher le message d'erreur sous la première checkbox -->
+						</div>
+						<!-- Séparation input pour afficher le message d'erreur sous la première checkbox -->
 						<div class="formData">
 							<input class="checkbox-input" id="checkbox2" type="checkbox"> <label class="checkbox2-label" for="checkbox2"><span class="checkbox-icon"></span> Je souhaite être prévenu des prochains évènements.</label><br>
-						</div><!-- Suppression 2eme class et ajouter d'un id et type -->
+						</div>
+						<!-- Suppression 2eme class et ajouter d'un id et type -->
 						<input class="btn-submit button" id="btnSubmit" type="submit" value="C'est parti">
-					</form><!-- Validation du formulaire: ajout d'une div et une class hidden.-->
+					</form>
+						<!-- Validation du formulaire: ajout d'une div et une class hidden.-->
 					<div class="confirmation aria-hidden" id="validateMessage">
 						<div>
 							<p>Merci pour<br>
