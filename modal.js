@@ -69,15 +69,23 @@ function closeModal() {
 }
 
 //Fermer le Modal
-modalClose.addEventListener('click', closeModal);
-
+modalClose.addEventListener('click', function() {
+  closeModal();
+});
 // On ferme la modale de confirmation
+// Event listener for the "Fermer" button
+btnValid.addEventListener('click', function() {
+  closeModalConfirmation();
+});
+
+// Function to close the confirmation modal
 function closeModalConfirmation() {
   modalbgThanks.style.display = 'none';
   modalbg.style.display = 'none';
   window.location.reload();
   form.reset();
-};
+}
+
  // VALIDATION DES CHAMPS //
 
 // @return  {Boolean}  true si valide sinon false
@@ -206,23 +214,23 @@ function validateCgu() {
 
 // Listener sur les champs
 Firstname.addEventListener('change', function () {
-  validateFirstName(this);
+  validateFirstName();
 });
 Lastname.addEventListener('change', function () {
-  validateLastName(this);
+  validateLastName();
 });
 email.addEventListener('change', function () {
-  validateEmail(this);
+  validateEmail();
 });
 birthdate.addEventListener('change', function () {
   validateBirthdate();
 });
 
 quantity.addEventListener('change', function () {
-  validateQuantity(this);
+  validateQuantity();
 });
 cgu.addEventListener('change', function () {
-  validateCgu(this);
+  validateCgu();
 });
 
 
@@ -242,18 +250,19 @@ function validate() {
       validateQuantity() &&
       validateCity() &&
       validateCgu()
-      ) {
+    ) {
       openModalThanking();
-      } 
-      else {
-      alert('Merci de remplir correctement votre inscription.')
-      }; 
+    } 
+    else {
+      alert('Merci de remplir correctement votre inscription.');
+    }
+     
 };
 
 // Envoyer la demande
 form.addEventListener('submit', function (event) {
   event.preventDefault();
-  validate()
+
 });
 
 /// Modal de remerciement
@@ -264,14 +273,6 @@ function openModalThanking() {
   
 }
  
-// ACTIVE LINKS, TOGGLE NAVBAR
-const activeLinks = document.querySelectorAll('.nav__link');
-activeLinks.forEach(activeLink => {
-      activeLink.addEventListener('click', () => {
-            document.querySelector('.active')?.classList.remove('active');
-            activeLink.classList.add('active');
-      });
-});
 
 
 
