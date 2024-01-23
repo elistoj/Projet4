@@ -31,7 +31,7 @@
 		<!-- Ajouter de l'attribut for à la balise label -->
 		<div class="bground">
 			<div class="content">
-				<span class="close" onclick="closeModal()" title="Fermer"></span>
+				<span class="close"  title="Fermer"></span>
 				<div class="modal-body">
 					<!-- Ajoutez un identifiant au formulaire pour un accès facile -->
 					<form action="index.html" id="reserve" method="get" name="reserve" onsubmit="return validate();">
@@ -78,7 +78,10 @@
 						<div>
 							<p>Merci pour<br>
 							votre inscription.</p>
-						</div><button class="btnValid" onclick="closeModalConfirmation()" type="button">Fermer</button>
+						</div>
+						<!-- Suppression onclick et ajouter d'un id  -->
+
+						<button class="btnValid" id="btnValid" type="button">Fermer</button>
 					</div>
 				</div>
 			</div>
@@ -91,3 +94,4 @@
 	</script>
 </body>
 </html>
+
